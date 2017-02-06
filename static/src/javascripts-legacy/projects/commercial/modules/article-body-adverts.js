@@ -9,7 +9,8 @@ define([
     'common/modules/commercial/dfp/add-slot',
     'common/modules/commercial/dfp/track-ad-render',
     'common/modules/commercial/dfp/create-slot',
-    'common/modules/commercial/commercial-features'
+    'common/modules/commercial/commercial-features',
+    'commercial/modules/ad-slots'
 ], function (
     Promise,
     qwery,
@@ -21,14 +22,13 @@ define([
     addSlot,
     trackAdRender,
     createSlot,
-    commercialFeatures
+    commercialFeatures,
+    adSlots
 ) {
 
     /* bodyAds is a counter that keeps track of the number of inline MPUs
      * inserted dynamically. */
     var bodyAds;
-    var replaceTopSlot;
-    var getSlotName;
     var tanSizes = {
         mobile: [adSizes.fluid250, adSizes.fabric]
     };
@@ -45,8 +45,6 @@ define([
         }
 
         bodyAds = 0;
-        replaceTopSlot = detect.isBreakpoint({max : 'phablet'});
-        getSlotName = replaceTopSlot ? getSlotNameForMobile : getSlotNameForDesktop;
 
         if (config.page.hasInlineMerchandise) {
             var im = addInlineMerchAd();
@@ -72,16 +70,6 @@ define([
             addInlineAds: addInlineAds
         }
     };
-
-    function getSlotNameForMobile() {
-        bodyAds += 1;
-        return bodyAds === 1 ? 'top-above-nav' : 'inline' + (bodyAds - 1);
-    }
-
-    function getSlotNameForDesktop() {
-        bodyAds += 1;
-        return 'inline' + bodyAds;
-    }
 
     function getRules() {
         var prevSlot;
@@ -161,7 +149,7 @@ define([
             var slots = paras
             .slice(0, Math.min(paras.length, count))
             .map(function (para) {
-                return insertAdAtPara(para, getSlotName(), 'inline');
+                return insertAdAtPara(para, adSlots.inline.getName(bodyAds++), 'inline');
             });
 
             return Promise.all(slots)

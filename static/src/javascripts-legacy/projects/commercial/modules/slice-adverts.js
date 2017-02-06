@@ -9,7 +9,8 @@ define([
     'common/modules/commercial/dfp/create-slot',
     'common/modules/commercial/dfp/add-slot',
     'common/modules/commercial/commercial-features',
-    'common/modules/user-prefs'
+    'common/modules/user-prefs',
+    'commercial/modules/ad-slots'
 ], function (
     qwery,
     Promise,
@@ -21,7 +22,8 @@ define([
     createSlot,
     addSlot,
     commercialFeatures,
-    userPrefs
+    userPrefs,
+    adSlots
 ) {
     var containerSelector = '.fc-container:not(.fc-container--commercial)';
     var sliceSelector = '.js-fc-slice-mpu-candidate';
@@ -59,11 +61,11 @@ define([
             done();
             return Promise.resolve(false);
         } else if (isMobile) {
-            insertOnMobile(containers, getSlotNameOnMobile)
+            insertOnMobile(containers)
             .then(addSlots)
             .then(done);
         } else {
-            insertOnDesktop(containers, getSlotNameOnDesktop)
+            insertOnDesktop(containers)
             .then(addSlots)
             .then(done);
         }
@@ -77,7 +79,7 @@ define([
     }
 
     // On mobile, a slot is inserted after each container
-    function insertOnMobile(containers, getSlotName) {
+    function insertOnMobile(containers) {
         var hasThrasher = containers[0].classList.contains('fc-container--thrasher');
         var includeNext = false;
         var tanSizes = {
@@ -102,7 +104,7 @@ define([
 
         slots = containers
         .map(function (container, index) {
-            var adName = getSlotName(index);
+            var adName = adSlots.inline.getName(index);
             var classNames = 'container-inline mobile';
             var slot, section;
             if (config.page.isAdvertisementFeature) {
@@ -127,7 +129,7 @@ define([
     }
 
     // On destkop, a slot is inserted when there is a slice available
-    function insertOnDesktop(containers, getSlotName) {
+    function insertOnDesktop(containers) {
         var slots;
 
         // Remove first container on network fronts
@@ -146,7 +148,7 @@ define([
         .slice(0, 10)
         // create ad slots for the selected slices
         .map(function (slice, index) {
-            var adName = getSlotName(index);
+            var adName = adSlots.inline.getName(index);
             var classNames = 'container-inline';
             var slot;
 
@@ -167,14 +169,6 @@ define([
             });
             return slots.map(function (_) { return _.slot; });
         });
-    }
-
-    function getSlotNameOnMobile(index) {
-        return index === 0 ? 'top-above-nav' : 'inline' + index;
-    }
-
-    function getSlotNameOnDesktop(index) {
-        return 'inline' + (index + 1);
     }
 
     function addSlots(slots) {

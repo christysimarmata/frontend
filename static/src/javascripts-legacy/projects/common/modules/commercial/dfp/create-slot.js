@@ -1,35 +1,12 @@
 define([
     'common/utils/config',
-    'common/modules/commercial/ad-sizes'
+    'common/modules/commercial/ad-sizes',
+    'commercial/modules/ad-slots'
 ], function (
     config,
-    adSizes
+    adSizes,
+    adSlotDefinitions
 ) {
-    var adSlotDefinitions = {
-        right: {
-            sizeMappings: {
-                mobile: [adSizes.outOfPage, adSizes.empty, adSizes.mpu, adSizes.fluid]
-            }
-        },
-        merchandising: {
-            label: false,
-            refresh: false,
-            sizeMappings: {
-                mobile: [adSizes.outOfPage, adSizes.empty, adSizes.fluid]
-            }
-        },
-        inline: {
-            sizeMappings: {
-                mobile: [adSizes.outOfPage, adSizes.empty, adSizes.mpu, adSizes.fluid],
-                desktop: [adSizes.outOfPage, adSizes.empty, adSizes.mpu, adSizes.video, adSizes.video2, adSizes.fluid]
-            }
-        },
-        container: {
-            sizeMappings: {
-                mobile: [adSizes.outOfPage, adSizes.empty, adSizes.mpu, adSizes.fluid]
-            }
-        }
-    };
 
     function createAdSlotElement(name, attrs, classes) {
         var adSlot = document.createElement('div');

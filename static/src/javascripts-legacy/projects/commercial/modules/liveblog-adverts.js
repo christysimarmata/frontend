@@ -8,6 +8,7 @@ define([
     'common/modules/commercial/commercial-features',
     'common/modules/commercial/dfp/create-slot',
     'common/modules/article/space-filler',
+    'commercial/modules/ad-slots',
     'Promise'
 ], function (
     fastdom,
@@ -19,6 +20,7 @@ define([
     commercialFeatures,
     createSlot,
     spaceFiller,
+    adSlots,
     Promise
 ) {
     var INTERVAL = 5;      // number of posts between ads
@@ -69,10 +71,7 @@ define([
 
     function insertAds(slots) {
         for (var i = 0; i < slots.length && slotCounter < MAX_ADS; i++) {
-            var slotName = isMobile && slotCounter === 0 ?
-                'top-above-nav' : isMobile ?
-                'inline' + slotCounter :
-                'inline' + (slotCounter + 1);
+            var slotName = adSlots.inline.getName(slotCounter);
             var adSlot = createSlot('inline', {
                 classes: 'liveblog-inline block',
                 name: slotName,
