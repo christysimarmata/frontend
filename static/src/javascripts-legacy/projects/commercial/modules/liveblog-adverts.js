@@ -1,6 +1,5 @@
 define([
     'common/utils/fastdom-promise',
-    'common/utils/detect',
     'common/utils/config',
     'common/utils/mediator',
     'common/modules/commercial/ad-sizes',
@@ -12,7 +11,6 @@ define([
     'Promise'
 ], function (
     fastdom,
-    detect,
     config,
     mediator,
     adSizes,
@@ -27,7 +25,7 @@ define([
     var OFFSET = 1.5;      // ratio of the screen height from which ads are loaded
     var MAX_ADS = 8;       // maximum number of ads to display
 
-    var slotCounter = 0, isMobile, windowHeight, firstSlot;
+    var slotCounter = 0, windowHeight, firstSlot;
     var tanSizes = {
         mobile: [adSizes.fluid250, adSizes.fabric]
     };
@@ -107,8 +105,6 @@ define([
             stop();
             return Promise.resolve();
         }
-
-        isMobile = detect.getBreakpoint() === 'mobile';
 
         fastdom.read(function () {
             return windowHeight = document.documentElement.clientHeight;
