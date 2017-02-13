@@ -23,7 +23,7 @@ define([
         container.appendChild(createSlot('merchandising', {
             name: 'merchandising-high',
             sizes: {
-                mobile: config.page.isAdvertisementFeature ? adSizes.merchandisingHighAdFeature : adSizes.merchandisingHigh
+                mobile: config.page.isPaidContent ? adSizes.merchandisingHighAdFeature : adSizes.merchandisingHigh
             }
         }));
 
