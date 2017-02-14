@@ -37,7 +37,6 @@ define([
         books:          complexUrlBuilder('books/books', 'isbns'),
         jobs:           complexUrlBuilder('jobs', 'jobIds', true),
         masterclasses:  complexUrlBuilder('masterclasses', 'ids', true),
-        liveevents:     complexUrlBuilder('liveevents/event', 'id', true),
         travel:         complexUrlBuilder('travel/offers', 'ids', true),
         multi:          complexUrlBuilder('multi', '', true),
         soulmatesGroup: soulmatesGroupUrlBuilder('soulmates/')
