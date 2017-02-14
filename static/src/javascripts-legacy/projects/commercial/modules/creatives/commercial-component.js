@@ -48,17 +48,6 @@ define([
         };
     }
 
-    function bookUrlBuilder(url) {
-        return function (params) {
-            var isbn = config.page.isbn || params.isbn;
-            if (isbn) {
-                return buildComponentUrl(url, merge(params, { t: isbn }));
-            } else {
-                return false;
-            }
-        };
-    }
-
     function soulmatesGroupUrlBuilder(url) {
         return function (params) {
             return buildComponentUrl(url + params.soulmatesFeedName, params);
