@@ -20,37 +20,6 @@ class BookOffersController(bookFinder: BookFinder, bestsellersAgent: Bestsellers
   with implicits.Collections
   with implicits.Requests {
 
-  def renderBook = Action.async { implicit request =>
-    specificId map { isbn =>
-      bookFinder.findByIsbn(isbn) map {
-        _ map { book =>
-          val clickMacro = request.getParameter("clickMacro")
-          val omnitureId = request.getParameter("omnitureId")
-          Cached(componentMaxAge) {
-            jsonFormat.result(views.html.books.book(book, omnitureId, clickMacro))
-          }
-        } getOrElse {
-          Cached(componentMaxAge)(jsonFormat.nilResult)
-        }
-      } recover {
-        case e: FeedSwitchOffException =>
-          log.warn(e.getMessage)
-          NoCache(jsonFormat.nilResult.result)
-        case e: FeedMissingConfigurationException =>
-          log.warn(e.getMessage)
-          NoCache(jsonFormat.nilResult.result)
-        case e: CacheNotConfiguredException =>
-          log.warn(e.getMessage)
-          NoCache(jsonFormat.nilResult.result)
-        case NonFatal(e) =>
-          log.error(e.getMessage)
-          NoCache(jsonFormat.nilResult.result)
-      }
-    } getOrElse {
-      Future.successful(NoCache(jsonFormat.nilResult.result))
-    }
-  }
-
   private def booksSample(isbns: Seq[String], segment: Segment): Future[Seq[Book]] =
     bestsellersAgent.getSpecificBooks(isbns) map { specificBooks =>
       (specificBooks ++ bestsellersAgent.bestsellersTargetedAt(segment)).distinctBy(_.isbn).take(4)

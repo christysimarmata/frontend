@@ -40,7 +40,6 @@ define([
         liveevents:     complexUrlBuilder('liveevents/event', 'id', true),
         travel:         complexUrlBuilder('travel/offers', 'ids', true),
         multi:          complexUrlBuilder('multi', '', true),
-        book:           bookUrlBuilder('books/book'),
         soulmatesGroup: soulmatesGroupUrlBuilder('soulmates/')
     };
 

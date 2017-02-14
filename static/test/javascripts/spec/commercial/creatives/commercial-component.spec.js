@@ -114,10 +114,6 @@ define([
 
         [
             {
-                type:    'book',
-                url:     '/commercial/books/book.json?t=9780701189426&k=annerice&k=fiction&k=books&k=culture'
-            },
-            {
                 type:    'jobs',
                 url:     '/commercial/jobs.json?jobIds=123%2C456&k=annerice&k=fiction&k=books&k=culture&t=123&t=456',
                 options: { jobIds: '123,456' }
