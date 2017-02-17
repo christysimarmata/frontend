@@ -138,7 +138,9 @@
       "classnames": "components/classnames/index",
       "reqwest": "components/reqwest/reqwest",
       "stripe": "stripe/stripe.min",
-      "react": "react/addons"
+      "react": "react/addons",
+      "helpers/fixtures": "<rootDir>/static/test/javascripts/helpers/fixtures",
+      "helpers/injector": "<rootDir>/static/test/javascripts/helpers/injector"
     },
     "globals": {}
   }
