@@ -4,12 +4,14 @@
   "private": true,
   "dependencies": {
     "JSON2": "^0.1.0",
+    "babel-plugin-import-globals": "^1.0.2",
     "babel-runtime": "^6.20.0",
     "bean": "~1.0.14",
     "domready": "^1.0.8",
     "es5-shim": "^4.5.9",
     "html5shiv": "^3.7.3",
     "react": "0.13.2",
+    "sinon": "^1.17.7",
     "tcp-ping": "^0.1.1",
     "webshot": "^0.18.0"
   },
@@ -110,7 +112,7 @@
   "jest": {
     "browser": true,
     "testPathDirs": [
-      "<rootDir>/static/__tests__"
+      "<rootDir>/static/test/javascripts"
     ],
     "testPathIgnorePatterns": [
       "eslintrc"
@@ -137,6 +139,7 @@
       "reqwest": "components/reqwest/reqwest",
       "stripe": "stripe/stripe.min",
       "react": "react/addons"
-    }
+    },
+    "globals": {}
   }
 }

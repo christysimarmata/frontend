@@ -28,7 +28,10 @@
                     }
                 }]
             ],
-            "plugins": ["transform-amd-to-commonjs"]
+            "plugins": [
+                "transform-amd-to-commonjs",
+                ["import-globals", { "sinon": "sinon" }]
+            ]
         },
         "internal": {
             "presets": [
