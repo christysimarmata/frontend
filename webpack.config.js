@@ -52,10 +52,6 @@ module.exports = ({ env = 'dev', plugins = [] } = {}) => ({
 
             // #wp-rjs once r.js is gone, these can be unaliased and modules updated
             react: 'react/addons',
-
-            // plugins
-            text: 'components/requirejs-text/text',
-            inlineSvg: 'projects/common/utils/inlineSvg',
         },
     },
     resolveLoader: {

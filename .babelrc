@@ -20,6 +20,16 @@
                 "transform-runtime",
             ],
         },
+        "test": {
+            "presets": [
+                ["env", {
+                    "targets": {
+                        "node": "current"
+                    }
+                }]
+            ],
+            "plugins": ["transform-amd-to-commonjs"]
+        },
         "internal": {
             "presets": [
                 ["env", {

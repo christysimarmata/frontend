@@ -5,6 +5,7 @@
   "dependencies": {
     "JSON2": "^0.1.0",
     "babel-runtime": "^6.20.0",
+    "bean": "~1.0.14",
     "domready": "^1.0.8",
     "es5-shim": "^4.5.9",
     "html5shiv": "^3.7.3",
@@ -22,6 +23,7 @@
     "babel-jest": "^18.0.0",
     "babel-loader": "^6.2.4",
     "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-amd-to-commonjs": "^0.2.0",
     "babel-plugin-transform-async-to-generator": "^6.16.0",
     "babel-plugin-transform-es2015-modules-amd": "^6.18.0",
     "babel-plugin-transform-runtime": "^6.15.0",
@@ -43,6 +45,7 @@
     "eslint-plugin-guardian-frontend": "file:tools/eslint-plugin-guardian-frontend",
     "eslint-plugin-import": "2.2.0",
     "eslint-plugin-jasmine": "^1.8.1",
+    "eslint-plugin-jest": "^1.0.2",
     "eslint-plugin-jsx-a11y": "2.2.3",
     "eslint-plugin-react": "6.8.0",
     "esprima": "1.2.2",
@@ -105,8 +108,35 @@
     "test": "jest"
   },
   "jest": {
+    "browser": true,
     "testPathDirs": [
       "<rootDir>/static/__tests__"
-    ]
+    ],
+    "testPathIgnorePatterns": [
+      "eslintrc"
+    ],
+    "moduleDirectories": [
+      "<rootDir>/static/src/javascripts",
+      "<rootDir>/static/src/javascripts-legacy",
+      "<rootDir>/static/src/javascripts-legacy/projects",
+      "<rootDir>/static/vendor/javascripts",
+      "node_modules"
+    ],
+    "moduleNameMapper": {
+      "bonzo": "components/bonzo/bonzo",
+      "domReady": "components/domready/ready",
+      "EventEmitter": "components/eventEmitter/index",
+      "fastdom": "components/fastdom/index",
+      "fence": "components/fence/fence",
+      "^lodash(.*)$": "components/lodash-amd$1",
+      "picturefill": "projects/common/utils/picturefill",
+      "Promise": "components/when/Promise",
+      "qwery": "components/qwery/qwery",
+      "raven": "components/raven-js/raven",
+      "classnames": "components/classnames/index",
+      "reqwest": "components/reqwest/reqwest",
+      "stripe": "stripe/stripe.min",
+      "react": "react/addons"
+    }
   }
 }
